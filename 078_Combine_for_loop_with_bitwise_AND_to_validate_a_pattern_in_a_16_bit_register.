@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+bool validatePattern(uint16_t reg, uint16_t pattern) {
+    for (int i = 0; i < 16; i++) {
+        // Check each bit using bitwise AND
+        if ((reg & (1 << i)) != (pattern & (1 << i))) {
+            return false;  // If any bit doesn't match the pattern, return false
+        }
+    }
+    return true;  // All bits match the pattern
+}
+
+int main() {
+    uint16_t reg = 0b1010101010101010;  // Example 16-bit register
+    uint16_t pattern = 0b1010101010101010;  // Pattern to validate
+    
+    if (validatePattern(reg, pattern)) {
+        printf("Pattern matched!\n");
+    } else {
+        printf("Pattern did not match.\n");
+    }
+
+    return 0;
+}
